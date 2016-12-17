@@ -1,0 +1,33 @@
+.header {
+	height: 100px;
+	background: blue;
+	color: white;
+}
+.brand {
+	padding: 1.5rem;
+}
+.game {
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+}
+button {
+	width: 100%;
+	background: blue;
+	color: white;
+	border: none;
+	padding: 2px;
+	margin: 2px;
+}
+.correct {
+	float: left;
+	margin-left: 5%;
+}
+.total {
+	float: right;
+	margin-right: 5%;
+}
+.question {
+	background: #F6F5F7;
+	text-align: left;
+}
