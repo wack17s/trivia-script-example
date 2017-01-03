@@ -57,12 +57,15 @@ function render() {
  * @param {string} category - parsed category of question from http://jservice.io/api/random
 */
 function push(question, id, answer, category) {
+	buildAnswer(answer);
+
 	document.getElementsByClassName("question")[0].innerHTML = question;
 	document.getElementsByClassName("id")[0].innerHTML = 'QUESTION #' + id;
 	console.log(id + ': ' + answer);
 	document.getElementsByClassName("category")[0].innerHTML = 'Category: ' + category;
 }
 
+// here we render all our staff  
 render();
 
 /*
@@ -79,6 +82,68 @@ function next() {
 */
 function skip() {
 	next();
+}
+
+/*
+*/
+function buildAnswer(answer) {	
+	let answerArr  = answer.split('');
+	shuffle(answerArr);
+
+	if (document.getElementsByClassName("ul1")[0].children[0]) document.getElementsByClassName("ul1")[0].children[0].remove();
+	if (document.getElementsByClassName("ul2")[0].children[0]) document.getElementsByClassName("ul2")[0].children[0].remove();
+
+	const ul1 = document.createElement("ul");
+	const ul2 = document.createElement("ul");	
+
+	for (let i = 0; i < answerArr.length; ++i) {		
+		const li = document.createElement("li");
+		const button = document.createElement("button");
+
+		button.className = "character";
+		button.onClick = "console.log('lol')";
+		button.innerHTML = ' ';
+		li.className = "inline-block";
+		li.appendChild(button);
+		ul1.className = "inline-list proposition-characters-container";
+		ul1.appendChild(li);
+	}
+
+	for (let i = 0; i < answerArr.length; ++i) {
+		const li = document.createElement("li");
+		const button = document.createElement("button");
+
+		button.className = "character";
+		button.id = i;
+		button.onClick = pushChar(button.id);
+		button.innerHTML = answerArr[i];
+		li.className = "inline-block";
+		li.appendChild(button);
+		ul2.className = "inline-list proposition-characters-container";
+		ul2.appendChild(li);
+	}
+
+	document.getElementsByClassName("ul1")[0].appendChild(ul1);
+	document.getElementsByClassName("ul2")[0].appendChild(ul2);
+}
+
+function pushChar(answerChar) {
+	onclick = (answerChar) => {
+		alert(this.id);
+  }
+
+  return onclick;
+}
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items The array containing the items.
+ */
+function shuffle(a) {
+    for (let i = a.length; i; i--) {
+        let j = Math.floor(Math.random() * i);
+        [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
 }
 
 /*
